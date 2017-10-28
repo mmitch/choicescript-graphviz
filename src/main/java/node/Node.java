@@ -5,7 +5,9 @@
 package node;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,7 +15,7 @@ public abstract class Node
 {
 	private static int idSequencer = 0;
 	private final int id;
-	private List<Node> next = new ArrayList<>();
+	private Set<Node> next = new HashSet<>();
 
 	protected Node()
 	{

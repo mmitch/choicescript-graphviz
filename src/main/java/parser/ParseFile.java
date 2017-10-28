@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import node.ChoiceNode;
@@ -28,9 +30,9 @@ public class ParseFile
 	private final List<Node> nodes = new ArrayList<>();
 	private final Stack<Node> stack = new Stack<>();
 	private final HashMap<String, Node> labels = new HashMap<>();
+	private final Set<Node> extraAppend = new HashSet<>();
 	private Node end;
 	private Node current;
-	private final List<Node> extraAppend = new ArrayList<>();
 	private int lastIndent = 0;
 
 	public ParseFile(String filename) throws IOException
