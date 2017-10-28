@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -29,7 +30,7 @@ public class ParseFile
 {
 	private final List<Node> nodes = new ArrayList<>();
 	private final Stack<Node> stack = new Stack<>();
-	private final HashMap<String, Node> labels = new HashMap<>();
+	private final Map<String, Node> labels = new HashMap<>();
 	private final Set<Node> extraAppend = new HashSet<>();
 	private Node end;
 	private Node current;
