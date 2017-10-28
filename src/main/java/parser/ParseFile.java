@@ -34,8 +34,8 @@ public class ParseFile
 
 	public ParseFile(String filename) throws IOException
 	{
-		createStartNode();
 		createEndNode();
+		createStartNode();
 		parseFile(new File(filename));
 	}
 
