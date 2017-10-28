@@ -30,6 +30,7 @@ public class ParseFile
 	private final HashMap<String, Node> labels = new HashMap<>();
 	private Node end;
 	private Node current;
+	private final List<Node> extraAppend = new ArrayList<>();
 	private int lastIndent = 0;
 
 	public ParseFile(String filename) throws IOException
@@ -60,6 +61,8 @@ public class ParseFile
 		{
 			current.append(newNode);
 		}
+		extraAppend.forEach(extra -> extra.append(newNode));
+		extraAppend.clear();
 		nodes.add(newNode);
 		return newNode;
 	}
@@ -86,6 +89,9 @@ public class ParseFile
 
 		while (indent < lastIndent)
 		{
+			// TODO: this needs to be refactored
+			connectDanglingIfPath();
+
 			current = stack.pop();
 			lastIndent--;
 		}
@@ -105,6 +111,14 @@ public class ParseFile
 			parseText(line);
 		}
 
+	}
+
+	private void connectDanglingIfPath()
+	{
+		if (stack.peek() instanceof IfNode)
+		{
+			extraAppend.add(current);
+		}
 	}
 
 	private void parseCommand(String line)
