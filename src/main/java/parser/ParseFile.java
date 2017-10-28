@@ -90,6 +90,8 @@ public class ParseFile
 			lastIndent--;
 		}
 
+		line = line.trim();
+
 		if (isCommand(line))
 		{
 			parseCommand(removeFirst(line));
