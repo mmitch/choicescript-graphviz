@@ -83,6 +83,11 @@ public class ParseFile
 
 	private void parseLine(String line)
 	{
+		if (line.matches("^\\s*$"))
+		{
+			return;
+		}
+
 		int indent = 0;
 		while (isIndented(line))
 		{
@@ -218,10 +223,6 @@ public class ParseFile
 	{
 		if (!(current instanceof TextNode))
 		{
-			if (line.matches("^\\s*$"))
-			{
-				return;
-			}
 			current = appendNodeToCurrent(new TextNode(indent));
 		}
 
