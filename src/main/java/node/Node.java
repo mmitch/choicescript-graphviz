@@ -14,12 +14,12 @@ import java.util.stream.Stream;
 public abstract class Node
 {
 	private static int idSequencer = 0;
-	private final int id;
+	private final String id;
 	private Set<Node> next = new HashSet<>();
 
 	protected Node()
 	{
-		id = idSequencer++;
+		id = String.valueOf(idSequencer++);
 	}
 
 	public void append(Node node)
@@ -39,13 +39,13 @@ public abstract class Node
 		{
 			attributes.add("tooltip=\"" + toolTip + "\"");
 		}
-		return String.format("%d [ %s ];\n", id, String.join(",", attributes));
+		return String.format("%s [ %s ];\n", id, String.join(",", attributes));
 	}
 
 	public String getEdgeString()
 	{
 		return next.stream() //
-				.map(child -> String.format("%d -> %d;\n", id, child.id)) //
+				.map(child -> String.format("%s -> %s;\n", id, child.id)) //
 				.collect(Collectors.joining());
 	}
 
