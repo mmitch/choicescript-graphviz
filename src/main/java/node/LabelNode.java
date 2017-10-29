@@ -20,7 +20,7 @@ public class LabelNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.CDS, Color.ORANGE, label) + dotEdgeTo(getNext());
+		return dotNode(Shape.CDS, Color.ORANGE, label) + dotEdgeToNext();
 	}
 
 }

@@ -17,6 +17,6 @@ public class StartNode extends LabelNode
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DOUBLECIRCLE, Color.CHARTREUSE, "START") + dotEdgeTo(getNext());
+		return dotNode(Shape.DOUBLECIRCLE, Color.CHARTREUSE, "START") + dotEdgeToNext();
 	}
 }

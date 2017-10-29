@@ -21,16 +21,15 @@ public class IfNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DIAMOND, Color.CORNSILK, condition) + dotEdgeTo(getNext(), this::getEdgeLabel);
-	}
-
-	private String getEdgeLabel(Node node)
-	{
-		if (isDeeper(node))
+		StringBuilder sb = new StringBuilder();
+		sb.append(dotNode(Shape.DIAMOND, Color.CORNSILK, condition));
+		if (conditionalPath != null)
 		{
-			return "Y";
+			sb.append(dotEdgeTo(conditionalPath, "Y"));
 		}
-		return "N";
+		getNext().map(next -> dotEdgeTo(next, "N")).ifPresent(sb::append);
+
+		return sb.toString();
 	}
 
 	@Override

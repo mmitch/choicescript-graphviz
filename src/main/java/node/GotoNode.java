@@ -20,7 +20,7 @@ public class GotoNode extends Node
 	{
 		// TODO: use node/shape, only a link to the label -> skip in source
 		// rendering, not so easy...
-		return dotNode(Shape.POINT, Color.NONE, "") + dotEdgeTo(getNext());
+		return dotNode(Shape.POINT, Color.NONE, "") + dotEdgeToNext();
 	}
 
 	@Override

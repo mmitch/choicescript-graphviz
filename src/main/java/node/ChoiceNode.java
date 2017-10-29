@@ -4,10 +4,6 @@
  */
 package node;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import dot.Color;
 import dot.Shape;
 
@@ -27,24 +23,17 @@ public class ChoiceNode extends Node
 
 	private String formatEdges()
 	{
-		return getNext() //
-				.map(this::formatEdge) //
-				.collect(Collectors.joining());
+		return getNext().map(this::formatEdge).orElse("");
 	}
 
 	private String formatEdge(Node selection)
 	{
-		Node target = getNextNodeFrom(selection).orElse(getNextNodeFrom(this).orElse(null));
+		Node target = selection.getNext().orElse(this.getNext().orElse(null));
 		if (selection instanceof SelectionNode)
 		{
-			return dotEdgeTo(Stream.of(target), node -> ((SelectionNode) selection).getSelection());
+			return dotEdgeTo(target, ((SelectionNode) selection).getSelection());
 		}
-		return dotEdgeTo(Stream.of(target));
-	}
-
-	private Optional<Node> getNextNodeFrom(Node node)
-	{
-		return node.getNext().findFirst();
+		return dotEdgeTo(target);
 	}
 
 }

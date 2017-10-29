@@ -24,7 +24,7 @@ public class TextNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.BOX, Color.NONE, "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
+		return dotNode(Shape.BOX, Color.NONE, "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeToNext();
 	}
 
 	private String getNodeToolTip()

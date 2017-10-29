@@ -5,27 +5,18 @@
 package node;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 import dot.Color;
 import dot.Shape;
 
 public abstract class Node
 {
-	protected interface LabelProvider extends Function<Node, String>
-	{
-
-	}
-
 	private static int idSequencer = 0;
 	private final int indent;
 	private final String id;
-	private final Set<Node> next = new HashSet<>();
+	private Node next;
 
 	protected Node(int indent)
 	{
@@ -35,7 +26,8 @@ public abstract class Node
 
 	public void append(Node node)
 	{
-		next.add(node);
+		// FIXME: assertions for "endless loop (self)" and "duplicate call"
+		next = node;
 	}
 
 	public abstract String formatForDot();
@@ -59,18 +51,19 @@ public abstract class Node
 		return String.format(" %s [ %s ];\n", id, String.join(",", attributes));
 	}
 
-	protected final String dotEdgeTo(Stream<Node> targets)
+	protected final String dotEdgeToNext()
 	{
-		return targets //
-				.map(target -> String.format(" %s -> %s;\n", id, target.id)) //
-				.collect(Collectors.joining());
+		return getNext().map(next -> dotEdgeTo(next)).orElse("");
 	}
 
-	protected final String dotEdgeTo(Stream<Node> targets, LabelProvider labelProvider)
+	protected final String dotEdgeTo(Node target)
 	{
-		return targets //
-				.map(target -> String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, labelProvider.apply(target))) //
-				.collect(Collectors.joining());
+		return String.format(" %s -> %s;\n", id, target.id);
+	}
+
+	protected final String dotEdgeTo(Node target, String label)
+	{
+		return String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, label);
 	}
 
 	protected final String getId()
@@ -78,9 +71,9 @@ public abstract class Node
 		return String.valueOf(id);
 	}
 
-	protected final Stream<Node> getNext()
+	protected final Optional<Node> getNext()
 	{
-		return next.stream();
+		return Optional.ofNullable(next);
 	}
 
 	protected final boolean isDeeper(Node other)
