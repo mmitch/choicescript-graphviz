@@ -21,15 +21,14 @@ public class VariableNode extends Node
 	}
 
 	@Override
-	protected String getNodeContent()
+	public String formatForDot()
 	{
-		return String.format("%s %s", type, variable);
+		return dotNode("hexagon", getNodeContent()) + dotEdgeTo(getNext());
 	}
 
-	@Override
-	protected String getNodeShape()
+	private String getNodeContent()
 	{
-		return "hexagon";
+		return String.format("%s %s", type, variable);
 	}
 
 }

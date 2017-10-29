@@ -6,16 +6,9 @@ package node;
 
 public class StartNode extends Node
 {
-
 	@Override
-	protected String getNodeContent()
+	public String formatForDot()
 	{
-		return "START";
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "doublecircle";
+		return dotNode("doublecircle", "START") + dotEdgeTo(getNext());
 	}
 }

@@ -27,36 +27,37 @@ public abstract class Node
 		next.add(node);
 	}
 
-	// FIXME: no separation of NodeString and EdgeString needed! dot files can
-	// be mixed
-	public String getNodeString()
+	public abstract String formatForDot();
+
+	protected final String dotNode(String shape, String content)
+	{
+		return dotNode(shape, content, null);
+	}
+
+	protected final String dotNode(String shape, String content, String tooltip)
 	{
 		List<String> attributes = new ArrayList<>();
-		attributes.add("shape=" + getNodeShape());
-		attributes.add("label=\"" + getNodeContent() + "\"");
-		String toolTip = getNodeToolTip();
-		if (toolTip != null)
+		attributes.add("shape=" + shape);
+		attributes.add("label=\"" + content + "\"");
+		if (tooltip != null)
 		{
-			attributes.add("tooltip=\"" + toolTip + "\"");
+			attributes.add("tooltip=\"" + tooltip + "\"");
 		}
 		return String.format("%s [ %s ];\n", id, String.join(",", attributes));
 	}
 
-	public String getEdgeString()
+	protected final String dotEdgeTo(Stream<Node> targets)
 	{
-		return next.stream() //
-				.map(child -> String.format("%s -> %s;\n", id, child.id)) //
+		return targets //
+				.map(target -> String.format("%s -> %s;\n", id, target.id)) //
 				.collect(Collectors.joining());
 	}
 
-	protected abstract String getNodeContent();
-
-	protected abstract String getNodeShape();
-
-	protected String getNodeToolTip()
+	protected final String dotEdgeTo(Stream<Node> targets, String label)
 	{
-		// empty by default
-		return null;
+		return targets //
+				.map(target -> String.format("%s -> %s [ label=\"%s\" ];\n", id, target.id, label)) //
+				.collect(Collectors.joining());
 	}
 
 	protected final String getId()

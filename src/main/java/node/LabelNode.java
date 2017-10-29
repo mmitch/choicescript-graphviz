@@ -14,15 +14,9 @@ public class LabelNode extends Node
 	}
 
 	@Override
-	protected String getNodeContent()
+	public String formatForDot()
 	{
-		return label;
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "cds";
+		return dotNode("cds", label) + dotEdgeTo(getNext());
 	}
 
 }

@@ -14,29 +14,15 @@ public class SelectionNode extends Node
 	}
 
 	@Override
-	public String getEdgeString()
+	public String formatForDot()
 	{
 		// handled by named edges in {@link ChoiceNode}
 		return "";
 	}
 
-	@Override
-	public String getNodeString()
-	{
-		// handled by named edges in {@link ChoiceNode}
-		return "";
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		// handled by named edges in {@link ChoiceNode}
-		return "";
-	}
-
-	@Override
-	protected String getNodeContent()
+	public String getSelection()
 	{
 		return selection;
 	}
+
 }

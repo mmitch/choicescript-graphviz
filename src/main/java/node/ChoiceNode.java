@@ -6,40 +6,38 @@ package node;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ChoiceNode extends Node
 {
 
 	@Override
-	public String getEdgeString()
+	public String formatForDot()
+	{
+		return dotNode("triangle", "?") + formatEdges();
+	}
+
+	private String formatEdges()
 	{
 		return getNext() //
 				.map(this::formatEdge) //
 				.collect(Collectors.joining());
 	}
 
-	@Override
-	protected String getNodeContent()
-	{
-		return "?";
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "triangle";
-	}
-
 	private String formatEdge(Node selection)
 	{
 		String myId = getId();
-		String targetId = getNextNodeFrom(selection).orElse(getNextNodeFrom(this).orElse("SOMETHING BROKE - NO TARGET"));
-		return String.format("%s -> %s [ label=\"%s\" ];\n", myId, targetId, selection.getNodeContent());
+		Node target = getNextNodeFrom(selection).orElse(getNextNodeFrom(this).orElse(null));
+		if (selection instanceof SelectionNode)
+		{
+			return dotEdgeTo(Stream.of(target), ((SelectionNode) selection).getSelection());
+		}
+		return dotEdgeTo(Stream.of(target));
 	}
 
-	private Optional<String> getNextNodeFrom(Node node)
+	private Optional<Node> getNextNodeFrom(Node node)
 	{
-		return node.getNext().findFirst().map(Node::getId);
+		return node.getNext().findFirst();
 	}
 
 }

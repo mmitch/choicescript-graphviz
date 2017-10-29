@@ -14,15 +14,9 @@ public class IfNode extends Node
 	}
 
 	@Override
-	protected String getNodeContent()
+	public String formatForDot()
 	{
-		return condition;
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "diamond";
+		return dotNode("diamond", condition) + dotEdgeTo(getNext());
 	}
 
 }

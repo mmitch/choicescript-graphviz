@@ -14,7 +14,12 @@ public class TextNode extends Node
 	}
 
 	@Override
-	protected String getNodeToolTip()
+	public String formatForDot()
+	{
+		return dotNode("box", "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
+	}
+
+	private String getNodeToolTip()
 	{
 		int end = text.length();
 		if (end > 100)
@@ -23,17 +28,4 @@ public class TextNode extends Node
 		}
 		return text.substring(0, end).replace("\"", "\\\"");
 	}
-
-	@Override
-	protected String getNodeContent()
-	{
-		return String.valueOf(text.length());
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "box";
-	}
-
 }

@@ -18,11 +18,7 @@ public class Main
 		System.out.println("digraph {");
 
 		nodes.stream() //
-				.map(Node::getNodeString) //
-				.forEach(System.out::print);
-
-		nodes.stream() //
-				.map(Node::getEdgeString) //
+				.map(Node::formatForDot) //
 				.forEach(System.out::print);
 
 		System.out.println("}");

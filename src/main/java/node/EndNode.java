@@ -8,15 +8,9 @@ public class EndNode extends Node
 {
 
 	@Override
-	protected String getNodeContent()
+	public String formatForDot()
 	{
-		return "END";
-	}
-
-	@Override
-	protected String getNodeShape()
-	{
-		return "doublecircle";
+		return dotNode("doublecircle", "END");
 	}
 
 }
