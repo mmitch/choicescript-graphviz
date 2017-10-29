@@ -38,8 +38,8 @@ public class ParseFile
 
 	public ParseFile(String filename) throws IOException
 	{
-		createEndNode();
 		createStartNode();
+		createEndNode();
 		parseFile(new File(filename));
 	}
 
@@ -50,15 +50,15 @@ public class ParseFile
 
 	private void createStartNode()
 	{
-		current = appendNode(new StartNode());
+		current = registerNewNode(new StartNode());
 	}
 
 	private void createEndNode()
 	{
-		end = appendNode(new EndNode());
+		end = registerNewNode(new EndNode());
 	}
 
-	private Node appendNode(Node newNode)
+	private <T extends Node> T appendNodeToCurrent(T newNode)
 	{
 		if (current != null)
 		{
@@ -66,6 +66,11 @@ public class ParseFile
 		}
 		extraAppend.forEach(extra -> extra.append(newNode));
 		extraAppend.clear();
+		return registerNewNode(newNode);
+	}
+
+	private <T extends Node> T registerNewNode(T newNode)
+	{
 		nodes.add(newNode);
 		return newNode;
 	}
@@ -138,19 +143,19 @@ public class ParseFile
 		{
 			case "choice":
 			case "fake_choice":
-				current = appendNode(new ChoiceNode());
+				current = appendNodeToCurrent(new ChoiceNode());
 				break;
 
 			case "if":
-				current = appendNode(new IfNode(params));
+				current = appendNodeToCurrent(new IfNode(params));
 				break;
 
 			case "set":
-				current = appendNode(new VariableNode(Type.SET, params));
+				current = appendNodeToCurrent(new VariableNode(Type.SET, params));
 				break;
 
 			case "rand":
-				current = appendNode(new VariableNode(Type.RANDOM, params));
+				current = appendNodeToCurrent(new VariableNode(Type.RANDOM, params));
 				break;
 
 			case "goto_scene": // TODO: add multifile handling
@@ -195,7 +200,7 @@ public class ParseFile
 		if (labelNode == null)
 		{
 			labelNode = new LabelNode(label);
-			nodes.add(labelNode);
+			registerNewNode(labelNode);
 			labels.put(label, labelNode);
 		}
 		return labelNode;
@@ -204,7 +209,7 @@ public class ParseFile
 	private void parseChoice(String line)
 	{
 		current = stack.peek();
-		current = appendNode(new SelectionNode(line));
+		current = appendNodeToCurrent(new SelectionNode(line));
 	}
 
 	private void parseText(String line)
@@ -215,7 +220,7 @@ public class ParseFile
 			{
 				return;
 			}
-			current = appendNode(new TextNode());
+			current = appendNodeToCurrent(new TextNode());
 		}
 
 		((TextNode) current).appendText(line);
