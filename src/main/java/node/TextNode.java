@@ -11,6 +11,11 @@ public class TextNode extends Node
 {
 	private final StringBuffer text = new StringBuffer();
 
+	public TextNode(int indent)
+	{
+		super(indent);
+	}
+
 	public void appendText(String line)
 	{
 		text.append(line);

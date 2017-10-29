@@ -17,8 +17,9 @@ public class VariableNode extends Node
 	private final String variable;
 	private final Type type;
 
-	public VariableNode(Type type, String variable)
+	public VariableNode(int indent, Type type, String variable)
 	{
+		super(indent);
 		this.type = type;
 		this.variable = variable;
 	}

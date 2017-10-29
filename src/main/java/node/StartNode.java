@@ -9,6 +9,11 @@ import dot.Shape;
 
 public class StartNode extends Node
 {
+	public StartNode()
+	{
+		super(0);
+	}
+
 	@Override
 	public String formatForDot()
 	{

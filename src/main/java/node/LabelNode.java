@@ -13,6 +13,7 @@ public class LabelNode extends Node
 
 	public LabelNode(String label)
 	{
+		super(0);
 		this.label = label;
 	}
 

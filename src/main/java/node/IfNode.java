@@ -11,8 +11,9 @@ public class IfNode extends Node
 {
 	private final String condition;
 
-	public IfNode(String condition)
+	public IfNode(int indent, String condition)
 	{
+		super(indent);
 		this.condition = condition;
 	}
 

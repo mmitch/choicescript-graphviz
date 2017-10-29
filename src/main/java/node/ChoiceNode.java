@@ -14,6 +14,11 @@ import dot.Shape;
 public class ChoiceNode extends Node
 {
 
+	public ChoiceNode(int indent)
+	{
+		super(indent);
+	}
+
 	@Override
 	public String formatForDot()
 	{

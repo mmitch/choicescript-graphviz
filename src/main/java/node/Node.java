@@ -17,11 +17,13 @@ import dot.Shape;
 public abstract class Node
 {
 	private static int idSequencer = 0;
+	private final int indent;
 	private final String id;
 	private Set<Node> next = new HashSet<>();
 
-	protected Node()
+	protected Node(int indent)
 	{
+		this.indent = indent;
 		id = String.valueOf(idSequencer++);
 	}
 
@@ -73,5 +75,10 @@ public abstract class Node
 	protected final Stream<Node> getNext()
 	{
 		return next.stream();
+	}
+
+	protected final boolean isDeeper(Node other)
+	{
+		return other.indent > this.indent;
 	}
 }

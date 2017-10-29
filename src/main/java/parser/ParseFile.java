@@ -108,15 +108,15 @@ public class ParseFile
 
 		if (isCommand(line))
 		{
-			parseCommand(removeFirst(line));
+			parseCommand(indent, removeFirst(line));
 		}
 		else if (isChoice(line))
 		{
-			parseChoice(removeFirst(line));
+			parseChoice(indent, removeFirst(line));
 		}
 		else
 		{
-			parseText(line);
+			parseText(indent, line);
 		}
 
 	}
@@ -129,7 +129,7 @@ public class ParseFile
 		}
 	}
 
-	private void parseCommand(String line)
+	private void parseCommand(int indent, String line)
 	{
 		String[] split = line.split("\\s+", 2);
 		String command = split[0];
@@ -143,19 +143,19 @@ public class ParseFile
 		{
 			case "choice":
 			case "fake_choice":
-				current = appendNodeToCurrent(new ChoiceNode());
+				current = appendNodeToCurrent(new ChoiceNode(indent));
 				break;
 
 			case "if":
-				current = appendNodeToCurrent(new IfNode(params));
+				current = appendNodeToCurrent(new IfNode(indent, params));
 				break;
 
 			case "set":
-				current = appendNodeToCurrent(new VariableNode(Type.SET, params));
+				current = appendNodeToCurrent(new VariableNode(indent, Type.SET, params));
 				break;
 
 			case "rand":
-				current = appendNodeToCurrent(new VariableNode(Type.RANDOM, params));
+				current = appendNodeToCurrent(new VariableNode(indent, Type.RANDOM, params));
 				break;
 
 			case "goto_scene": // TODO: add multifile handling
@@ -172,12 +172,12 @@ public class ParseFile
 
 			case "selectable_if": // TODO: better handling needed!
 				split = params.split("#", 2);
-				parseChoice(split[1]);
+				parseChoice(indent, split[1]);
 				break;
 
 			case "disable_reuse": // TODO: better handling needed!
 				split = params.split("#", 2);
-				parseChoice(split[1]);
+				parseChoice(indent, split[1]);
 				break;
 
 			case "advertisement":
@@ -206,13 +206,13 @@ public class ParseFile
 		return labelNode;
 	}
 
-	private void parseChoice(String line)
+	private void parseChoice(int indent, String line)
 	{
 		current = stack.peek();
-		current = appendNodeToCurrent(new SelectionNode(line));
+		current = appendNodeToCurrent(new SelectionNode(indent, line));
 	}
 
-	private void parseText(String line)
+	private void parseText(int indent, String line)
 	{
 		if (!(current instanceof TextNode))
 		{
@@ -220,7 +220,7 @@ public class ParseFile
 			{
 				return;
 			}
-			current = appendNodeToCurrent(new TextNode());
+			current = appendNodeToCurrent(new TextNode(indent));
 		}
 
 		((TextNode) current).appendText(line);

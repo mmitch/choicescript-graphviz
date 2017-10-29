@@ -8,8 +8,9 @@ public class SelectionNode extends Node
 {
 	private final String selection;
 
-	public SelectionNode(String selection)
+	public SelectionNode(int indent, String selection)
 	{
+		super(indent);
 		this.selection = selection;
 	}
 
