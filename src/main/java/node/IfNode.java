@@ -39,6 +39,9 @@ public class IfNode extends Node
 		{
 			conditionalPath = node;
 		}
-		super.append(node);
+		else
+		{
+			super.append(node);
+		}
 	}
 }
