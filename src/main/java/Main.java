@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 
 import node.Node;
@@ -15,12 +16,18 @@ public class Main
 	{
 		List<Node> nodes = new ParseFile("/home/mitch/Dropbox/TheGreatTournament/mygame/scenes/war.txt").getNodes();
 
-		System.out.println("digraph {");
+		writeDotFile(nodes, System.out);
+		writeDotFile(nodes, new PrintStream("foo.dot"));
+	}
+
+	private static void writeDotFile(List<Node> nodes, PrintStream ps)
+	{
+		ps.println("digraph {");
 
 		nodes.stream() //
 				.map(Node::formatForDot) //
-				.forEach(System.out::print);
+				.forEach(ps::print);
 
-		System.out.println("}");
+		ps.println("}");
 	}
 }
