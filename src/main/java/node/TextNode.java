@@ -4,6 +4,7 @@
  */
 package node;
 
+import dot.Color;
 import dot.Shape;
 
 public class TextNode extends Node
@@ -18,7 +19,7 @@ public class TextNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.BOX, "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
+		return dotNode(Shape.BOX, Color.NONE, "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
 	}
 
 	private String getNodeToolTip()

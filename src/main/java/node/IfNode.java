@@ -4,6 +4,7 @@
  */
 package node;
 
+import dot.Color;
 import dot.Shape;
 
 public class IfNode extends Node
@@ -18,7 +19,7 @@ public class IfNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DIAMOND, condition) + dotEdgeTo(getNext());
+		return dotNode(Shape.DIAMOND, Color.CORNSILK, condition) + dotEdgeTo(getNext());
 	}
 
 }

@@ -4,6 +4,7 @@
  */
 package node;
 
+import dot.Color;
 import dot.Shape;
 
 public class EndNode extends Node
@@ -12,7 +13,7 @@ public class EndNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DOUBLECIRCLE, "END");
+		return dotNode(Shape.DOUBLECIRCLE, Color.FIREBRICK, "END");
 	}
 
 }

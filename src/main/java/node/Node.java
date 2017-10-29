@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dot.Color;
 import dot.Shape;
 
 public abstract class Node
@@ -31,15 +32,17 @@ public abstract class Node
 
 	public abstract String formatForDot();
 
-	protected final String dotNode(Shape shape, String content)
+	protected final String dotNode(Shape shape, Color color, String content)
 	{
-		return dotNode(shape, content, null);
+		return dotNode(shape, color, content, null);
 	}
 
-	protected final String dotNode(Shape shape, String content, String tooltip)
+	protected final String dotNode(Shape shape, Color color, String content, String tooltip)
 	{
 		List<String> attributes = new ArrayList<>();
 		attributes.add("shape=" + shape.dotString());
+		attributes.add("fillcolor=" + color.dotString());
+		attributes.add("style=filled");
 		attributes.add("label=\"" + content + "\"");
 		if (tooltip != null)
 		{

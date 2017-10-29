@@ -4,6 +4,7 @@
  */
 package node;
 
+import dot.Color;
 import dot.Shape;
 
 public class StartNode extends Node
@@ -11,6 +12,6 @@ public class StartNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DOUBLECIRCLE, "START") + dotEdgeTo(getNext());
+		return dotNode(Shape.DOUBLECIRCLE, Color.CHARTREUSE, "START") + dotEdgeTo(getNext());
 	}
 }

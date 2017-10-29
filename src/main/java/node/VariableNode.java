@@ -4,6 +4,7 @@
  */
 package node;
 
+import dot.Color;
 import dot.Shape;
 
 public class VariableNode extends Node
@@ -25,7 +26,7 @@ public class VariableNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.HEXAGON, getNodeContent()) + dotEdgeTo(getNext());
+		return dotNode(Shape.HEXAGON, Color.POWDERBLUE, getNodeContent()) + dotEdgeTo(getNext());
 	}
 
 	private String getNodeContent()
