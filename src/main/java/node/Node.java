@@ -25,7 +25,7 @@ public abstract class Node
 	private static int idSequencer = 0;
 	private final int indent;
 	private final String id;
-	private Set<Node> next = new HashSet<>();
+	private final Set<Node> next = new HashSet<>();
 
 	protected Node(int indent)
 	{
