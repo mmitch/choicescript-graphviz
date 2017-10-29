@@ -161,7 +161,7 @@ public class ParseFile
 
 			case "goto_scene": // TODO: add multifile handling
 			case "finish":
-				current.append(end);
+				current = appendNodeToCurrent(new GotoNode(indent, end));
 				break;
 
 			case "goto":
