@@ -34,11 +34,10 @@ public class ChoiceNode extends Node
 
 	private String formatEdge(Node selection)
 	{
-		String myId = getId();
 		Node target = getNextNodeFrom(selection).orElse(getNextNodeFrom(this).orElse(null));
 		if (selection instanceof SelectionNode)
 		{
-			return dotEdgeTo(Stream.of(target), ((SelectionNode) selection).getSelection());
+			return dotEdgeTo(Stream.of(target), node -> ((SelectionNode) selection).getSelection());
 		}
 		return dotEdgeTo(Stream.of(target));
 	}

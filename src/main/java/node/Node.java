@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -16,6 +17,11 @@ import dot.Shape;
 
 public abstract class Node
 {
+	protected interface LabelProvider extends Function<Node, String>
+	{
+
+	}
+
 	private static int idSequencer = 0;
 	private final int indent;
 	private final String id;
@@ -60,10 +66,10 @@ public abstract class Node
 				.collect(Collectors.joining());
 	}
 
-	protected final String dotEdgeTo(Stream<Node> targets, String label)
+	protected final String dotEdgeTo(Stream<Node> targets, LabelProvider labelProvider)
 	{
 		return targets //
-				.map(target -> String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, label)) //
+				.map(target -> String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, labelProvider.apply(target))) //
 				.collect(Collectors.joining());
 	}
 

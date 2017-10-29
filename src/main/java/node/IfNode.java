@@ -10,6 +10,7 @@ import dot.Shape;
 public class IfNode extends Node
 {
 	private final String condition;
+	private Node conditionalPath;
 
 	public IfNode(int indent, String condition)
 	{
@@ -20,7 +21,25 @@ public class IfNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode(Shape.DIAMOND, Color.CORNSILK, condition) + dotEdgeTo(getNext());
+		return dotNode(Shape.DIAMOND, Color.CORNSILK, condition) + dotEdgeTo(getNext(), this::getEdgeLabel);
 	}
 
+	private String getEdgeLabel(Node node)
+	{
+		if (isDeeper(node))
+		{
+			return "Y";
+		}
+		return "N";
+	}
+
+	@Override
+	public void append(Node node)
+	{
+		if (isDeeper(node))
+		{
+			conditionalPath = node;
+		}
+		super.append(node);
+	}
 }
