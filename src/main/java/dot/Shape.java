@@ -6,7 +6,7 @@ package dot;
 
 public enum Shape
 {
-	TRIANGLE, DOUBLECIRCLE, DIAMOND, CDS, BOX, HEXAGON;
+	TRIANGLE, DOUBLECIRCLE, DIAMOND, CDS, BOX, HEXAGON, POINT;
 
 	public String dotString()
 	{

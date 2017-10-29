@@ -17,6 +17,7 @@ import java.util.Stack;
 
 import node.ChoiceNode;
 import node.EndNode;
+import node.GotoNode;
 import node.IfNode;
 import node.LabelNode;
 import node.Node;
@@ -30,7 +31,7 @@ public class ParseFile
 {
 	private final List<Node> nodes = new ArrayList<>();
 	private final Stack<Node> stack = new Stack<>();
-	private final Map<String, Node> labels = new HashMap<>();
+	private final Map<String, LabelNode> labels = new HashMap<>();
 	private final Set<Node> extraAppend = new HashSet<>();
 	private Node end;
 	private Node current;
@@ -164,7 +165,7 @@ public class ParseFile
 				break;
 
 			case "goto":
-				current.append(createOrFindLabel(params));
+				current = appendNodeToCurrent(new GotoNode(indent, createOrFindLabel(params)));
 				break;
 
 			case "label":
@@ -195,9 +196,9 @@ public class ParseFile
 
 	}
 
-	private Node createOrFindLabel(String label)
+	private LabelNode createOrFindLabel(String label)
 	{
-		Node labelNode = labels.get(label);
+		LabelNode labelNode = labels.get(label);
 		if (labelNode == null)
 		{
 			labelNode = new LabelNode(label);
