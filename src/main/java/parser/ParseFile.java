@@ -161,6 +161,7 @@ public class ParseFile
 			case "goto_scene": // TODO: add multifile handling
 			case "finish":
 				current.append(end);
+				break;
 
 			case "goto":
 				current.append(createOrFindLabel(params));
