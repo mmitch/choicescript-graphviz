@@ -33,7 +33,7 @@ public class ParseFile
 	private final Stack<Node> stack = new Stack<>();
 	private final Map<String, LabelNode> labels = new HashMap<>();
 	private final Set<Node> extraAppend = new HashSet<>();
-	private Node end;
+	private EndNode end;
 	private Node current;
 	private int lastIndent = 0;
 

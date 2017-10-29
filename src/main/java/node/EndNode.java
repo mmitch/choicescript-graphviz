@@ -7,12 +7,12 @@ package node;
 import dot.Color;
 import dot.Shape;
 
-public class EndNode extends Node
+public class EndNode extends LabelNode
 {
 
 	public EndNode()
 	{
-		super(0);
+		super("END");
 	}
 
 	@Override
