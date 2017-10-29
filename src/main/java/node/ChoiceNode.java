@@ -8,13 +8,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dot.Shape;
+
 public class ChoiceNode extends Node
 {
 
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("triangle", "?") + formatEdges();
+		return dotNode(Shape.TRIANGLE, "?") + formatEdges();
 	}
 
 	private String formatEdges()

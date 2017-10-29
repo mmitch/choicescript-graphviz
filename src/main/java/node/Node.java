@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dot.Shape;
+
 public abstract class Node
 {
 	private static int idSequencer = 0;
@@ -29,15 +31,15 @@ public abstract class Node
 
 	public abstract String formatForDot();
 
-	protected final String dotNode(String shape, String content)
+	protected final String dotNode(Shape shape, String content)
 	{
 		return dotNode(shape, content, null);
 	}
 
-	protected final String dotNode(String shape, String content, String tooltip)
+	protected final String dotNode(Shape shape, String content, String tooltip)
 	{
 		List<String> attributes = new ArrayList<>();
-		attributes.add("shape=" + shape);
+		attributes.add("shape=" + shape.dotString());
 		attributes.add("label=\"" + content + "\"");
 		if (tooltip != null)
 		{

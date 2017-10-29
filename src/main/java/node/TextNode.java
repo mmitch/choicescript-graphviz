@@ -4,6 +4,8 @@
  */
 package node;
 
+import dot.Shape;
+
 public class TextNode extends Node
 {
 	private final StringBuffer text = new StringBuffer();
@@ -16,7 +18,7 @@ public class TextNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("box", "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
+		return dotNode(Shape.BOX, "T[" + text.length() + "]", getNodeToolTip()) + dotEdgeTo(getNext());
 	}
 
 	private String getNodeToolTip()

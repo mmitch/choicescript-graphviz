@@ -4,13 +4,15 @@
  */
 package node;
 
+import dot.Shape;
+
 public class EndNode extends Node
 {
 
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("doublecircle", "END");
+		return dotNode(Shape.DOUBLECIRCLE, "END");
 	}
 
 }

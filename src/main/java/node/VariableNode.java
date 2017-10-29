@@ -4,6 +4,8 @@
  */
 package node;
 
+import dot.Shape;
+
 public class VariableNode extends Node
 {
 	public enum Type
@@ -23,7 +25,7 @@ public class VariableNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("hexagon", getNodeContent()) + dotEdgeTo(getNext());
+		return dotNode(Shape.HEXAGON, getNodeContent()) + dotEdgeTo(getNext());
 	}
 
 	private String getNodeContent()

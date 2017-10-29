@@ -4,6 +4,8 @@
  */
 package node;
 
+import dot.Shape;
+
 public class IfNode extends Node
 {
 	private final String condition;
@@ -16,7 +18,7 @@ public class IfNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("diamond", condition) + dotEdgeTo(getNext());
+		return dotNode(Shape.DIAMOND, condition) + dotEdgeTo(getNext());
 	}
 
 }

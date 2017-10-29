@@ -4,6 +4,8 @@
  */
 package node;
 
+import dot.Shape;
+
 public class LabelNode extends Node
 {
 	private final String label;
@@ -16,7 +18,7 @@ public class LabelNode extends Node
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("cds", label) + dotEdgeTo(getNext());
+		return dotNode(Shape.CDS, label) + dotEdgeTo(getNext());
 	}
 
 }

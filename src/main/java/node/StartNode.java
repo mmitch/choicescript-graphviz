@@ -4,11 +4,13 @@
  */
 package node;
 
+import dot.Shape;
+
 public class StartNode extends Node
 {
 	@Override
 	public String formatForDot()
 	{
-		return dotNode("doublecircle", "START") + dotEdgeTo(getNext());
+		return dotNode(Shape.DOUBLECIRCLE, "START") + dotEdgeTo(getNext());
 	}
 }
