@@ -48,20 +48,20 @@ public abstract class Node
 		{
 			attributes.add("tooltip=\"" + tooltip + "\"");
 		}
-		return String.format("%s [ %s ];\n", id, String.join(",", attributes));
+		return String.format(" %s [ %s ];\n", id, String.join(",", attributes));
 	}
 
 	protected final String dotEdgeTo(Stream<Node> targets)
 	{
 		return targets //
-				.map(target -> String.format("%s -> %s;\n", id, target.id)) //
+				.map(target -> String.format(" %s -> %s;\n", id, target.id)) //
 				.collect(Collectors.joining());
 	}
 
 	protected final String dotEdgeTo(Stream<Node> targets, String label)
 	{
 		return targets //
-				.map(target -> String.format("%s -> %s [ label=\"%s\" ];\n", id, target.id, label)) //
+				.map(target -> String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, label)) //
 				.collect(Collectors.joining());
 	}
 
