@@ -157,6 +157,10 @@ public class ParseFile
 				current = appendNodeToCurrent(new IfNode(indent, params));
 				break;
 
+			case "create":
+				current = appendNodeToCurrent(new VariableNode(indent, Type.CREATE, params));
+				break;
+
 			case "set":
 				current = appendNodeToCurrent(new VariableNode(indent, Type.SET, params));
 				break;
