@@ -1,6 +1,8 @@
 convert ChoiceScript files to GraphViz trees
 ============================================
 
+[![Build Status](https://travis-ci.org/mmitch/choicescript-graphviz.svg?branch=master)](https://travis-ci.org/mmitch/choicescript-graphviz)
+
 examples
 --------
 
@@ -17,6 +19,9 @@ project status
 
 Not all ChoiceScript parameters are implemented yet.  I don't know if
 they ever will be.
+
+Note that text nodes are shortened to *T[character_count]*.  The first
+part of the text will be displayed as a tooltip.
 
 resources
 ---------
