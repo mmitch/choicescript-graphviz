@@ -1,5 +1,8 @@
 language: java
 
+script:
+  - make test
+
 # Gradle specific cache handling
 # see http://docs.travis-ci.com/user/languages/java/#Caching
 before_cache:
