@@ -1,11 +1,16 @@
 EXAMPLE_DIR=example
 BUILD_DIR=build
-CLASS_DIR=$(BUILD_DIR)/classes/main
 TEST_DIR=$(BUILD_DIR)/tmp/test
 
 TEST_RESULT=$(TEST_DIR)/result.dot
 EXAMPLE_TXT=$(EXAMPLE_DIR)/example.txt
 EXAMPLE_DOT=$(EXAMPLE_DIR)/example.dot
+
+# different Gradle configurations seem to user different directories...
+CLASS_DIR=$(BUILD_DIR)/classes/main
+ifeq ($(realpath $(CLASS_DIR)),)
+	CLASS_DIR=$(BUILD_DIR)/classes/java/main
+endif
 
 all: test
 
