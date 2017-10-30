@@ -80,4 +80,36 @@ public abstract class Node
 	{
 		return other.indent > this.indent;
 	}
+
+	protected void appendIfDangling(Node start, Node newNode)
+	{
+		Node node = start;
+		while (true)
+		{
+			if (node == newNode)
+			{
+				// if we come across the node to be appended, there is nothing
+				// to do
+				return;
+			}
+	
+			if (node instanceof GotoNode)
+			{
+				// a *goto jumps to a fixed location, so no further appending is
+				// necessary
+				return;
+			}
+	
+			Node next = node.getNext().orElse(null);
+	
+			if (next == null)
+			{
+				// that's our dangling end!
+				node.append(newNode);
+				return;
+			}
+	
+			node = next;
+		}
+	}
 }

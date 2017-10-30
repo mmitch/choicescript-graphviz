@@ -7,7 +7,6 @@ package node;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import dot.Color;
 import dot.Shape;
@@ -36,13 +35,15 @@ public class ChoiceNode extends Node
 		}
 		else
 		{
+			children.forEach(selection -> appendIfDangling(selection, node));
 			super.append(node);
 		}
 	}
 
 	private String formatEdges()
 	{
-		return Stream.concat(children.stream(), getNextAsStream()) //
+		// ignore our own next, *choice can only connect via selections
+		return children.stream() //
 				.map(this::formatEdge) //
 				.collect(Collectors.joining());
 	}
@@ -55,10 +56,5 @@ public class ChoiceNode extends Node
 			return dotEdgeTo(target, ((SelectionNode) selection).getSelection());
 		}
 		return dotEdgeTo(target);
-	}
-
-	private Stream<Node> getNextAsStream()
-	{
-		return getNext().map(Stream::of).orElse(Stream.empty());
 	}
 }

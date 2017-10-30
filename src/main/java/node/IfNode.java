@@ -41,6 +41,7 @@ public class IfNode extends Node
 		}
 		else
 		{
+			appendIfDangling(conditionalPath, node);
 			super.append(node);
 		}
 	}

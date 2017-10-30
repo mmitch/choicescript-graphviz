@@ -129,7 +129,8 @@ public class ParseFile
 
 	private void connectDanglingIfPath()
 	{
-		if (stack.peek() instanceof IfNode)
+		Node parent = stack.peek();
+		if (parent instanceof IfNode)
 		{
 			extraAppend.add(current);
 		}
