@@ -1,0 +1,34 @@
+*create price 10
+*create random 0
+
+*label haggle
+Do you want to haggle?
+*choice
+	#Haggle.
+		*rand random 1 10
+		*if rand < price
+			It worked.
+			*set price - 1
+			*goto haggle
+		It did not work.
+		*goto haggle
+	#Accept the price.
+		*goto main
+		
+*label main
+One, two, don't know what to do.
+
+*choice
+	#How much is the fish?
+		The fish is ${price} gold.
+		*finish
+	*disable_reuse #Faster Harder Scooter.
+		This was very exhausting.
+		Never again!
+		*goto main
+	#Endless summer.
+		The summer continues.
+		*goto main
+	#Move your ass.
+		Sorry, you don't see any animals.
+		*goto main
