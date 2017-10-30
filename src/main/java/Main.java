@@ -14,7 +14,7 @@ public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
-		List<Node> nodes = new ParseFile("/home/mitch/Dropbox/TheGreatTournament/mygame/scenes/war.txt").getNodes();
+		List<Node> nodes = new ParseFile("foo.txt").getNodes();
 
 		writeDotFile(nodes, System.out);
 		writeDotFile(nodes, new PrintStream("foo.dot"));
