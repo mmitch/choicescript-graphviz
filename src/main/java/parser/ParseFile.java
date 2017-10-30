@@ -176,7 +176,7 @@ public class ParseFile
 				break;
 
 			case "label":
-				current = registerNewNode(new LabelNode(params));
+				current = appendNodeToCurrent(new LabelNode(params));
 				break;
 
 			case "selectable_if": // TODO: better handling needed!
