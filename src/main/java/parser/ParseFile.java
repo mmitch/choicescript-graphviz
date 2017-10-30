@@ -8,10 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -31,7 +29,6 @@ public class ParseFile
 {
 	private final List<Node> nodes = new ArrayList<>();
 	private final Stack<Node> stack = new Stack<>();
-	private final Map<String, LabelNode> labels = new HashMap<>();
 	private final Set<Node> extraAppend = new HashSet<>();
 	private EndNode end;
 	private Node current;
@@ -175,11 +172,11 @@ public class ParseFile
 				break;
 
 			case "goto":
-				current = appendNodeToCurrent(new GotoNode(indent, createOrFindLabel(params)));
+				current = appendNodeToCurrent(new GotoNode(indent, params));
 				break;
 
 			case "label":
-				current = createOrFindLabel(params);
+				current = registerNewNode(new LabelNode(params));
 				break;
 
 			case "selectable_if": // TODO: better handling needed!
@@ -204,18 +201,6 @@ public class ParseFile
 
 		// TODO Auto-generated method stub
 
-	}
-
-	private LabelNode createOrFindLabel(String label)
-	{
-		LabelNode labelNode = labels.get(label);
-		if (labelNode == null)
-		{
-			labelNode = new LabelNode(label);
-			registerNewNode(labelNode);
-			labels.put(label, labelNode);
-		}
-		return labelNode;
 	}
 
 	private void parseChoice(int indent, String line)

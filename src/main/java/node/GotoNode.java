@@ -4,20 +4,35 @@
  */
 package node;
 
+import java.util.function.Supplier;
+
 import dot.Color;
 import dot.Shape;
 
 public class GotoNode extends Node
 {
-	public GotoNode(int indent, LabelNode labelNode)
+	private final Supplier<LabelNode> delayedLabelNodeLookup;
+
+	public GotoNode(int indent, String targetLabel)
 	{
 		super(indent);
-		super.append(labelNode);
+		delayedLabelNodeLookup = () -> LabelNode.findByLabel(targetLabel);
+	}
+
+	public GotoNode(int indent, LabelNode targetNode)
+	{
+		super(indent);
+		delayedLabelNodeLookup = () -> targetNode;
 	}
 
 	@Override
 	public String formatForDot()
 	{
+		if (!getNext().isPresent())
+		{
+			super.append(delayedLabelNodeLookup.get());
+		}
+
 		// TODO: use node/shape, only a link to the label -> skip in source
 		// rendering, not so easy...
 		return dotNode(Shape.POINT, Color.NONE, "") + dotEdgeToNext();
