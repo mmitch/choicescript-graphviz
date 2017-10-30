@@ -8,9 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 import node.ChoiceNode;
@@ -29,7 +27,6 @@ public class ParseFile
 {
 	private final List<Node> nodes = new ArrayList<>();
 	private final Stack<Node> stack = new Stack<>();
-	private final Set<Node> extraAppend = new HashSet<>();
 	private EndNode end;
 	private Node current;
 	private int lastIndent = 0;
@@ -62,8 +59,6 @@ public class ParseFile
 		{
 			current.append(newNode);
 		}
-		extraAppend.forEach(extra -> extra.append(newNode));
-		extraAppend.clear();
 		return registerNewNode(newNode);
 	}
 
@@ -100,9 +95,6 @@ public class ParseFile
 
 		while (indent < lastIndent)
 		{
-			// TODO: this needs to be refactored
-			connectDanglingIfPath();
-
 			current = stack.pop();
 			lastIndent--;
 		}
@@ -122,15 +114,6 @@ public class ParseFile
 			parseText(indent, line);
 		}
 
-	}
-
-	private void connectDanglingIfPath()
-	{
-		Node parent = stack.peek();
-		if (parent instanceof IfNode)
-		{
-			extraAppend.add(current);
-		}
 	}
 
 	private void parseCommand(int indent, String line)
