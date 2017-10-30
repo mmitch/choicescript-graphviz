@@ -1,5 +1,9 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 import node.Node;
@@ -14,10 +18,33 @@ public class Main
 {
 	public static void main(String[] args) throws IOException
 	{
-		List<Node> nodes = new ParseFile("foo.txt").getNodes();
+		Deque<String> arguments = new LinkedList<>(Arrays.asList(args));
+
+		String inputFilename = arguments.pollFirst();
+		if (inputFilename == null)
+		{
+			throw new RuntimeException("\n\nusage:\n  Main <input.txt> [ <output1.dot> [ ... ] ]\n");
+		}
+
+		List<Node> nodes = new ParseFile(inputFilename).getNodes();
 
 		writeDotFile(nodes, System.out);
-		writeDotFile(nodes, new PrintStream("foo.dot"));
+
+		arguments.forEach(outputFilename -> writeDotFile(nodes, outputFilename));
+
+	}
+
+	private static void writeDotFile(List<Node> nodes, String filename)
+	{
+		try
+		{
+			writeDotFile(nodes, new PrintStream(filename));
+		} catch (FileNotFoundException e)
+		{
+			// stupid CheckedExceptions vs. Java 8 Functional stuff
+			throw new RuntimeException(e);
+		}
+		System.err.println("also wrote to " + filename);
 	}
 
 	private static void writeDotFile(List<Node> nodes, PrintStream ps)
