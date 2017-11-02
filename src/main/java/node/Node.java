@@ -30,6 +30,11 @@ public abstract class Node
 		next = node;
 	}
 
+	public final String getId()
+	{
+		return String.valueOf(id);
+	}
+
 	public abstract String formatForDot();
 
 	protected final String dotNode(Shape shape, Color color, String content)
@@ -66,11 +71,6 @@ public abstract class Node
 		return String.format(" %s -> %s [ label=\"%s\" ];\n", id, target.id, label);
 	}
 
-	protected final String getId()
-	{
-		return String.valueOf(id);
-	}
-
 	protected final Optional<Node> getNext()
 	{
 		return Optional.ofNullable(next);
@@ -92,23 +92,23 @@ public abstract class Node
 				// to do
 				return;
 			}
-	
+
 			if (node instanceof GotoNode)
 			{
 				// a *goto jumps to a fixed location, so no further appending is
 				// necessary
 				return;
 			}
-	
+
 			Node next = node.getNext().orElse(null);
-	
+
 			if (next == null)
 			{
 				// that's our dangling end!
 				node.append(newNode);
 				return;
 			}
-	
+
 			node = next;
 		}
 	}

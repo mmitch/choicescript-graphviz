@@ -3,10 +3,17 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 import node.Node;
+import node.SelectionNode;
+import node.StartNode;
 import parser.ParseFile;
 
 /*
@@ -32,6 +39,48 @@ public class Main
 
 		arguments.forEach(outputFilename -> writeDotFile(nodes, outputFilename));
 
+		showWarnings(nodes);
+	}
+
+	private static void showWarnings(List<Node> nodes)
+	{
+		// TODO: REFACTOR: it is a bit stupid to first convert to dot and then
+		// parse that output to get the followup nodes…
+
+		Map<String, Node> unusedIds = new HashMap<>();
+		nodes.stream() //
+				.filter(Main::nodeReceivesConnections) //
+				.forEach(node -> unusedIds.put(node.getId(), node));
+
+		Pattern nextNodePattern = Pattern.compile("^\\s*\\d+\\s*->\\s*(\\d+)");
+
+		nodes.stream() //
+				.map(Node::formatForDot) //
+				.flatMap(dotLines -> Stream.of(dotLines.split("\n"))) //
+				.flatMap(dotLine -> {
+					Matcher nextNode = nextNodePattern.matcher(dotLine);
+					if (nextNode.find())
+					{
+						return Stream.of(nextNode.group(1));
+					}
+					return Stream.empty();
+				}) //
+				.forEach(unusedIds::remove);
+
+		unusedIds.values().forEach(node -> System.err.printf("WARNING: unconnected node %s: [%s]\n%s\n", node.getId(), node.getClass().getSimpleName(), node.formatForDot()));
+	}
+
+	private static boolean nodeReceivesConnections(Node node)
+	{
+		if (node instanceof SelectionNode)
+		{
+			return false;
+		}
+		if (node instanceof StartNode)
+		{
+			return false;
+		}
+		return true;
 	}
 
 	private static void writeDotFile(List<Node> nodes, String filename)
