@@ -23,6 +23,23 @@ they ever will be.
 Note that text nodes are shortened to *T[character_count]*.  The first
 part of the text will be displayed as a tooltip.
 
+todos
+-----
+
+- implement missing commands
+  - *comment
+  - *else
+  - *elsif
+  - *gosub
+  - *goto_scene
+  - *hide_reuse
+  - *input_text
+  - *return
+  - *temp
+- *if between *choice and #selection
+- show *disable_reuse on #selection graph edge
+- show *selectable_if on #selection graph edge
+
 resources
 ---------
 
