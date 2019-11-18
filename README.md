@@ -3,6 +3,25 @@ convert ChoiceScript files to GraphViz trees
 
 [![Build Status](https://travis-ci.org/mmitch/choicescript-graphviz.svg?branch=master)](https://travis-ci.org/mmitch/choicescript-graphviz)
 
+requirement
+-----------
+
+- java
+- gradle (`sudo apt-get install gradle`)
+
+installation
+------------
+
+1. `git clone https://github.com/mmitch/choicescript-graphviz.git`
+2. `make`
+
+usage
+-----
+
+`java -cp /path/to/choicescript-graphviz/build/classes/java/main Main /path/to/choicescript/scene.txt > output.dot`
+
+**Note:** The choicescript .txt file must use tabs for indentation (not spaces).
+
 examples
 --------
 
