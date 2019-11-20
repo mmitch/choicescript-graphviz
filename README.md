@@ -26,7 +26,7 @@ examples
 --------
 
 1. [example ChoiceScript file](example/example.txt)
-2. [converted to dot](example/example.dot)
+2. [converted to dot](example/example.dot) (Can be viewed with `xdot`)
 3. [converted to SVG](example/example.dot.svg)
 
 project status
