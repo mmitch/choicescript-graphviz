@@ -13,7 +13,7 @@ installation
 ------------
 ```
 $ git clone https://github.com/mmitch/choicescript-graphviz.git
-$ cd choicescript-graphviz.git
+$ cd choicescript-graphviz
 $ make
 ```
 
