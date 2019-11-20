@@ -11,22 +11,26 @@ requirement
 
 installation
 ------------
-
-1. `git clone https://github.com/mmitch/choicescript-graphviz.git`
-2. `make`
+```
+$ git clone https://github.com/mmitch/choicescript-graphviz.git
+$ cd choicescript-graphviz.git
+$ make
+```
 
 usage
 -----
 
 `java -cp /path/to/choicescript-graphviz/build/classes/java/main Main /path/to/choicescript/scene.txt > output.dot`
 
-**Note:** The choicescript .txt file must use tabs for indentation (not spaces).
+**Note #1:** The choicescript .txt file must use tabs for indentation (not spaces).
+
+**Note #2:** The output can be viewed with `xdot` or other graphviz software.
 
 examples
 --------
 
 1. [example ChoiceScript file](example/example.txt)
-2. [converted to dot](example/example.dot) (Can be viewed with `xdot`)
+2. [converted to dot](example/example.dot)
 3. [converted to SVG](example/example.dot.svg)
 
 project status
