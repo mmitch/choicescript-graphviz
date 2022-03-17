@@ -11,7 +11,7 @@ public class VariableNode extends Node
 {
 	public enum Type
 	{
-		SET, RANDOM, CREATE
+		SET, RANDOM, CREATE, TEMP
 	};
 
 	private final String variable;
