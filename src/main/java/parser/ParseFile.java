@@ -30,6 +30,7 @@ public class ParseFile
 	private EndNode end;
 	private Node current;
 	private int lastIndent = 0;
+	private String indenter = "";
 
 	public ParseFile(String filename) throws IOException
 	{
@@ -204,7 +205,11 @@ public class ParseFile
 
 	private String removeFirst(String line)
 	{
-		return line.substring(1);
+		int toremove = 1;
+		if (firstCharIs(line, ' ')) {
+			toremove = indenter.length();
+		}
+		return line.substring(toremove);
 	}
 
 	private boolean isChoice(String line)
@@ -219,7 +224,31 @@ public class ParseFile
 
 	private boolean isIndented(String line)
 	{
-		return firstCharIs(line, '\t');
+		// Initially determine the indenter type
+		String temp = "";
+		if (indenter == "") {
+			if (firstCharIs(line, '\t') || firstCharIs(line, ' ')) {
+				if (firstCharIs(line, '\t')) {
+					indenter = "\t";
+				} else if (firstCharIs(line, ' ')) {
+					// gather spaces
+					for(int i = 0; i<line.length(); i++) {
+						if (line.charAt(i) == ' ') {
+							temp += ' ';
+						} else {
+							break;
+						}
+					}
+					indenter = temp;
+				}
+			}
+		}
+		// See if line is indented
+		if (indenter == "\t") {
+			return firstCharIs(line, '\t');
+		} else {
+			return firstCharIs(line, ' ');
+		}
 	}
 
 	private boolean firstCharIs(String line, char c)
