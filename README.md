@@ -22,9 +22,7 @@ usage
 
 `java -cp /path/to/choicescript-graphviz/build/classes/java/main Main /path/to/choicescript/scene.txt > output.dot`
 
-**Note #1:** The choicescript .txt file must use tabs for indentation (not spaces).
-
-**Note #2:** The output can be viewed with `xdot` or other graphviz software.
+**Note:** The output can be viewed with `xdot` or other graphviz software.
 
 examples
 --------
