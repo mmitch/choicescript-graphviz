@@ -150,7 +150,13 @@ public class ParseFile
 				current = appendNodeToCurrent(new VariableNode(indent, Type.RANDOM, params));
 				break;
 
-			case "goto_scene": // TODO: add multifile handling
+			case "temp":
+				current = appendNodeToCurrent(new VariableNode(indent, Type.TEMP, params));
+				break;
+
+			case "goto_scene":
+			case "gosub_scene":
+			case "ending":
 			case "finish":
 				current = appendNodeToCurrent(new GotoNode(indent, end));
 				break;
@@ -174,6 +180,19 @@ public class ParseFile
 				break;
 
 			case "advertisement":
+			case "link":
+			case "title":
+			case "author":
+			case "comment":
+			case "input_text":
+			case "input_number":
+			case "params":
+			case "script":
+			case "check_achievements":
+			case "bug":
+			case "line_break":
+			case "achieve":
+			case "text_image":
 			case "image": // TODO: or use node?
 			case "page_break": // TODO: or use multiple text nodes?
 				// just skip it
