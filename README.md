@@ -27,7 +27,7 @@ usage
 examples
 --------
 
-1. [example ChoiceScript file](example/example.txt)
+1. [example ChoiceScript file](example/example-4-spaces.txt)
 2. [converted to dot](example/example.dot)
 3. [converted to SVG](example/example.dot.svg)
 
