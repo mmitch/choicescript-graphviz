@@ -10,3 +10,5 @@ gradlew.bat
 .classpath
 .project
 .settings/
+
+build/
