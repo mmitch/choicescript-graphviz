@@ -3,7 +3,6 @@ BUILD_DIR=build
 TEST_DIR=$(BUILD_DIR)/tmp/test
 
 TEST_RESULT=$(TEST_DIR)/result.dot
-EXAMPLE_TXT=$(EXAMPLE_DIR)/example.txt
 EXAMPLE_DOT=$(EXAMPLE_DIR)/example.dot
 
 # different Gradle configurations seem to user different directories...
@@ -26,5 +25,9 @@ build:
 
 test:	build
 	mkdir -p $(TEST_DIR)
-	java -cp $(CLASS_DIR) Main $(EXAMPLE_TXT) > $(TEST_RESULT)
+	java -cp $(CLASS_DIR) Main $(EXAMPLE_DIR)/example-tabs.txt > $(TEST_RESULT)
+	cmp $(EXAMPLE_DOT) $(TEST_RESULT)
+	java -cp $(CLASS_DIR) Main $(EXAMPLE_DIR)/example-2-spaces.txt > $(TEST_RESULT)
+	cmp $(EXAMPLE_DOT) $(TEST_RESULT)
+	java -cp $(CLASS_DIR) Main $(EXAMPLE_DIR)/example-4-spaces.txt > $(TEST_RESULT)
 	cmp $(EXAMPLE_DOT) $(TEST_RESULT)
