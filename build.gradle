@@ -1,4 +1,2 @@
-apply plugin: 'java'
-
 /* we are a Java project, obviously */
-sourceCompatibility = '1.8'
+apply plugin: 'java'
