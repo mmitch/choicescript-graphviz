@@ -1,7 +1,7 @@
 convert ChoiceScript files to GraphViz trees
 ============================================
 
-[![Build Status](https://github.com/mmitch/choicescript-graphviz/workflows/Java%20CI/badge.svg?branch=master)](https://github.com/mmitch/choicescript-graphviz/actions?query=workflow%3A%22Java+CI%22)
+[![Build Status](https://github.com/mmitch/choicescript-graphviz/workflows/Java%20CI/badge.svg)](https://github.com/mmitch/choicescript-graphviz/actions?query=workflow%3A%22Java+CI%22)
 
 requirement
 -----------
